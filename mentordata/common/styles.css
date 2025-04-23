@@ -1,0 +1,612 @@
+/* Basic Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
+  
+button {
+  border: none;
+  background: none;
+}
+  
+/* Full-screen sections */
+section {
+  min-height: 100vh;
+  padding: 100px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header Section */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #007bff;
+  padding: 20px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.header .pagetitle {
+  color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  display: flex;
+  align-items: center; /* Align the text and checkmark */
+}
+
+.check-icon {
+  width: 20px; /* Adjust the size of the checkmark icon */
+  height: 20px;
+  margin-left: 5px; /* Tight spacing between the text and the icon */
+}
+
+/* Desktop navigation styles */
+.navbar a {
+  color: #fff;
+  margin: 0 15px;
+  font-size: 18px;
+  display: inline-block; /* Ensure the links are inline in desktop view */
+}
+
+/* Mobile navigation styles */
+.navbar {
+  display: none; /* Hidden by default on mobile */
+  transition: all 0.3s ease-in-out;
+}
+
+.navbar.active {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background: rgba(0, 123, 255, 0.8); /* Semi-transparent background */
+  padding: 10px 20px;
+  border-radius: 8px;
+  backdrop-filter: blur(8px); /* Apply the blur effect */
+}
+
+#menu-icon {
+  display: block;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+/* Show navbar on mobile when active */
+.navbar.active a {
+  padding: 10px 0;
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Desktop-specific styles */
+@media screen and (min-width: 768px) {
+  .navbar {
+    display: flex !important;
+    flex-direction: row;
+  }
+
+  .navbar a {
+    color: #fff;
+    margin: 0 15px;
+    font-size: 18px;
+  }
+
+  #menu-icon {
+    display: none;
+  }
+}
+
+
+/* Responsive Styling for Mobile Menu */
+#menu-icon {
+  font-size: 30px;
+  color: white;
+  display: none; /* Hide menu icon by default */
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+      display: none; /* Hide the navbar on small screens */
+  }
+
+  #menu-icon {
+      display: block; /* Show the menu icon on small screens */
+  }
+}
+
+  
+  /* Home Section */
+  .home {
+    min-height: 100vh;
+    padding-top: 140px;
+    padding-left: 20px;
+    padding-right: 20px;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .home-img img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid #007bff;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.2);
+  }
+  
+  .home-content {
+    max-width: 600px;
+    text-align: center;
+  }
+  
+  .home-content h1 {
+    font-size: 2.5rem;
+    color: #007bff;
+  }
+  
+  .home-content .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 25px;
+    margin-top: 15px;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+  
+  .home-content .btn:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Desktop View */
+  @media (min-width: 768px) {
+    .home {
+      flex-direction: row;
+      padding-top: 140px;
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+  
+    .home-img {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+  
+    .home-content {
+      flex: 1;
+      padding-left: 40px;
+      text-align: left;
+    }
+  }
+  
+ /* ---------- Hero Section ---------- */
+
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 130px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 80px;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  max-width: 600px;
+}
+
+.hero-text h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.hero-text h3 {
+  color: #007bff;
+}
+
+
+.hero-text p {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.hero-img img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #eee;
+}
+
+.hero-img img {
+  transition: box-shadow 0.3s ease-in-out; /* Smooth transition for the shadow effect */
+}
+
+.hero-img img:hover {
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.884); /* Blue shadow */
+}
+
+
+.hero-text .btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #4e54c8, #4f57ef);
+  border: none;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.hero-text .btn:hover {
+  transform: translateY(-3px);
+  background: linear-gradient(135deg, #8f94fb, #4e54c8);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+/* ---------- Responsive (max-width: 768px) ---------- */
+
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .hero-img img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .hero-text {
+    padding: 0 20px;
+  }
+
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .hero-text p {
+    font-size: 15px;
+  }
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+  color: #007bff; /* Change color to match your theme */
+  animation: blink 0.7s infinite;
+  font-weight: bold;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+  
+/* About Section */
+.about {
+  background-color: #fff;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.about-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.about-content h2.heading {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+
+.about-box {
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  line-height: 1.7;
+  font-size: 1rem;
+  color: #333;
+  margin: 0 auto 40px auto;
+  max-width: 850px;
+}
+
+
+/* No flex layout needed anymore */
+@media (min-width: 768px) {
+  .about-content h2,
+  .about-content h3 {
+    text-align: center;
+  }
+
+  .about-box {
+    text-align: left;
+  }
+}
+
+  
+/* Services Section */
+.services {
+  background-color: #f7f7f7;
+  padding: 40px 20px; /* Reduced from 100px */
+  text-align: center;
+}
+
+
+.services-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto; /* Center the container */
+}
+
+/* Heading Style */
+.heading {
+  font-size: 3rem; /* Large font size for title */
+  color: #007bff; /* Blue color for title */
+  font-weight: bold;
+  margin-bottom: 50px; /* Add space below the title */
+}
+
+.services-box {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 40px;
+  width: 320px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.services-box:hover {
+  border-color: #0056b3; /* NITTE Blue Shade */
+  transform: translateY(-15px);
+  box-shadow: 0 8px 25px rgba(0, 86, 179, 0.2); /* Slightly darker shadow for hover effect */
+}
+
+.services-box h3 {
+  font-size: 2rem; /* Larger font size for service titles */
+  margin-top: 20px;
+  color: #0056b3; /* Blue color for service titles */
+  font-weight: bold;
+}
+
+.services-box p {
+  font-size: 1rem;
+  color: #333; /* Dark grey for professional appearance */
+  line-height: 1.6;
+  margin-top: 15px;
+}
+
+.services-box ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.services-box ul li {
+  color: #666; /* Lighter grey for list items */
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.services-box ul li::before {
+  content: "✔"; /* Checkmark icon */
+  color: #0056b3; /* Blue checkmark */
+  margin-right: 8px;
+}
+
+@media (min-width: 768px) {
+  .services {
+    padding: 80px 40px;
+  }
+
+  .services-container {
+    justify-content: center; /* Keep it centered on larger screens too */
+  }
+}
+
+
+
+/* General Section Styling */
+.contact {
+  padding: 80px 20px;
+  background-color: #fff;  /* White background for professionalism */
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+}
+
+.contact-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #333;  /* Dark color for the heading */
+  letter-spacing: 2px;
+}
+
+.contact-box {
+  background-color: #f4f4f4;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.67);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.contact-box:hover {
+  transform: scale(1.05);
+  background-color: #eaf4ff; /* Light blue highlight */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+.email-icon {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.email-image {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.3s ease;
+}
+
+.email-text {
+  font-size: 18px;
+  font-weight: 500;
+  color: #000000;  
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.email-text:hover {
+  color: #007BFF;  /* Blue color on hover */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact {
+    padding: 60px 20px;
+  }
+
+  .contact-box {
+    padding: 30px;
+  }
+
+  h2 {
+    font-size: 30px;
+  }
+
+  .email-text {
+    font-size: 16px;
+  }
+}
+
+/* Footer Section */
+.footer {
+  background-color: #007bff; /* Blue color for footer */
+  padding: 30px 20px;
+  text-align: center;
+  color: #fff;
+}
+
+.footer .nav-links-container {
+  margin-bottom: 20px; /* Space between links and the copyright text */
+}
+
+.footer .nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer .nav-links li {
+  display: inline;
+  margin: 0 15px;
+}
+
+.footer .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.footer .nav-links a:hover {
+  text-decoration: underline; /* Add underline effect on hover */
+}
+
+/* Copyright Styling */
+.footer p {
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.footer a {
+  color: #fff;
+}
+
+.footer a:hover {
+  color: #f8f9fa; /* Slightly lighter color on hover */
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-padding-top: 80px;
+}
