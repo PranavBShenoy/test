@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="/common/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* Enhanced Dashboard Styles */
+    .profile-card {
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border: 1px solid transparent;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .profile-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      border-color: #0ef;
+    }
+    
+    .profile-card img {
+      transition: transform 0.5s ease;
+    }
+    
+    .profile-card:hover img {
+      transform: scale(1.05);
+    }
+    
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(14, 255, 255, 0.2) 0%, transparent 100%);
+      transition: top 0.5s ease;
+      z-index: 1;
+    }
+    
+    .profile-card:hover::before {
+      top: 0;
+    }
+    
+    .profile-info {
+      position: relative;
+      z-index: 2;
+      transition: transform 0.3s ease;
+    }
+    
+    .profile-card:hover .profile-info {
+      transform: translateY(-5px);
+    }
+    
+    .team-members {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.8s forwards;
+    }
+    
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .toggle-mode-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: #333;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .toggle-mode-btn:hover {
+      transform: rotate(30deg);
+      background: #0ef;
+    }
+    
+    body.dark-mode .toggle-mode-btn {
+      background: #0ef;
+    }
+    
+    .highlight {
+      background-color: rgba(14, 255, 255, 0.2);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+    
+    #searchInput {
+      transition: all 0.3s ease;
+      border: 2px solid #ddd;
+      border-radius: 25px;
+      padding: 10px 20px;
+      width: 100%;
+      max-width: 500px;
+      font-size: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    
+    #searchInput:focus {
+      border-color: #0ef;
+      box-shadow: 0 0 8px rgba(14, 255, 255, 0.5);
+      outline: none;
+    }
+    
+    .filter-controls {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    
+    .team-title {
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #333;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .team-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 50px;
+      height: 3px;
+      background: #0ef;
+    }
+    
+    body.dark-mode .team-title {
+      color: #fff;
+    }
+    
+    .visible {
+      animation: fadeIn 0.5s ease forwards;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <button class="toggle-mode-btn" onclick="toggleDarkMode()">
+    <i class="fas fa-moon dark-icon"></i>
+    <i class="fas fa-sun light-icon" style="display: none;"></i>
+  </button>
+  <header class="header">
+    <span class="pagetitle">STUDENT DASHBOARD</span>
+    <nav class="navbar">
+      <a href="mentor.html">About Mentor</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+  <main class="dashboard">
+    <h2 class="team-title">Team</h2>
+    <div class="filter-controls">
+      <input type="text" id="searchInput" placeholder="Search by name, USN, or email..." />
+    </div>
+    <section class="team-section">
+      <div class="team-members">
+        <!-- Student cards with lazy loading -->
+        <div class="profile-card">
+          <img loading="lazy" src="https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS158.JPG" alt="Profile Photo" />
+          <div class="profile-info">
+            <h3>Pramukh A Nayak</h3>
+            <p><strong>USN:</strong> NNM24IS158</p>
+            <p><strong>Email:</strong> nnm224is158@nmamit.in</p>
+          </div>
+        </div>
+        <!-- Student 2 -->
+        <div class="profile-card">
+          <img loading="lazy" src="https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS159.JPG" alt="Profile Photo" />
+          <div class="profile-info">
+            <h3>Pranav R</h3>
+            <p><strong>USN:</strong> NNM24IS159</p>
+            <p><strong>Email:</strong> nnm24is159@nmamit.in</p>
+          </div>
+        </div>
+        <!-- Student 3 -->
+        <div class="profile-card">
+          <img loading="lazy" src="https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS160.JPG" alt="Profile Photo" />
+          <div class="profile-info">
+            <h3>Pranav Shenoy</h3>
+            <p><strong>USN:</strong> NNM24IS160</p>
+            <p><strong>Email:</strong> nnm24is160@nmamit.in</p>
+          </div>
+        </div>
+        <!-- Student 4 -->
+        <div class="profile-card">
+          <img loading="lazy" src="https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS161.JPG" alt="Profile Photo" />
+          <div class="profile-info">
+            <h3>Prarthana A</h3>
+            <p><strong>USN:</strong> NNM24IS161</p>
+            <p><strong>Email:</strong> nnm24is161@nmamit.in</p>
+          </div>
+        </div>
+        <!-- Student 5 -->
+        <div class="profile-card">
+          <img loading="lazy" src="https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS162.JPG" alt="Profile Photo" />
+          <div class="profile-info">
+            <h3>Prarthana N</h3>
+            <p><strong>USN:</strong> NNM24IS162</p>
+            <p><strong>Email:</strong> nnm24is162@nmamit.in</p>
+          </div>
+        </div>
+        <!-- Student 6 -->
+        <div class="profile-card">
+          <img loading="lazy" src="https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS163.JPG" alt="Profile Photo" />
+          <div class="profile-info">
+            <h3>Pratham N</h3>
+            <p><strong>USN:</strong> NNM24IS163</p>
+            <p><strong>Email:</strong> nnm24is163@nmamit.in</p>
+          </div>
+        </div>
+        <!-- Student 7 -->
+        <div class="profile-card">
+          <img loading="lazy" src="https://university-student-photos.s3.ap-south-1.amazonaws.com/049/student_photos%2FNNM24IS164.JPG" alt="Profile Photo" />
+          <div class="profile-info">
+            <h3>Pratham P</h3>
+            <p><strong>USN:</strong> NNM24IS164</p>
+            <p><strong>Email:</strong> nnm24is164@nmamit.in</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script>
+    // Enhanced Dark mode toggle with localStorage and icon switching
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const isDarkMode = document.body.classList.contains('dark-mode');
+      localStorage.setItem('darkMode', isDarkMode);
+      
+      // Toggle icons
+      document.querySelector('.dark-icon').style.display = isDarkMode ? 'none' : 'block';
+      document.querySelector('.light-icon').style.display = isDarkMode ? 'block' : 'none';
+      
+      // Add transition effect to body
+      document.body.style.transition = 'background-color 0.5s ease, color 0.5s ease';
+      
+      // Animate profile cards on mode change
+      const cards = document.querySelectorAll('.profile-card');
+      cards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('mode-transition');
+          setTimeout(() => card.classList.remove('mode-transition'), 500);
+        }, index * 50);
+      });
+    }
+
+    // Restore dark mode preference
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+      document.querySelector('.dark-icon').style.display = 'none';
+      document.querySelector('.light-icon').style.display = 'block';
+    }
+
+    // Enhanced debounced search function with highlighting
+    function debounce(func, wait) {
+      let timeout;
+      return function (...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+      };
+    }
+
+    const searchInput = document.getElementById("searchInput");
+    if (searchInput) {
+      // Add search icon and animation
+      searchInput.insertAdjacentHTML('afterend', '<span class="search-icon"><i class="fas fa-search"></i></span>');
+      
+      const performSearch = debounce(function (value) {
+        const filter = value.toLowerCase();
+        const cards = document.querySelectorAll(".profile-card");
+        
+        if (filter.length === 0) {
+          // Reset all cards when search is empty
+          cards.forEach(card => {
+            card.style.display = "";
+            // Remove any highlights
+            card.querySelectorAll('.highlight').forEach(el => {
+              el.outerHTML = el.textContent;
+            });
+          });
+          return;
+        }
+        
+        requestAnimationFrame(() => {
+          cards.forEach((card) => {
+            const text = card.textContent.toLowerCase();
+            const matches = text.includes(filter);
+            
+            // Display or hide the card
+            card.style.display = matches ? "" : "none";
+            
+            if (matches && filter.length > 0) {
+              // First remove any existing highlights
+              card.querySelectorAll('.highlight').forEach(el => {
+                el.outerHTML = el.textContent;
+              });
+              
+              // Add new highlights
+              highlightMatches(card, filter);
+              
+              // Add a subtle animation to matching cards
+              card.classList.add('search-match');
+              setTimeout(() => card.classList.remove('search-match'), 500);
+            }
+          });
+        });
+      }, 300);
+
+      // Function to highlight matching text
+      function highlightMatches(element, filter) {
+        const nodeStack = [element];
+        
+        while (nodeStack.length) {
+          const node = nodeStack.pop();
+          
+          if (node.nodeType === Node.TEXT_NODE) {
+            const text = node.textContent;
+            const lowerText = text.toLowerCase();
+            let position = lowerText.indexOf(filter);
+            
+            if (position !== -1) {
+              const span = document.createElement('span');
+              span.className = 'highlight';
+              span.textContent = text.substring(position, position + filter.length);
+              
+              const before = document.createTextNode(text.substring(0, position));
+              const after = document.createTextNode(text.substring(position + filter.length));
+              
+              const parent = node.parentNode;
+              parent.insertBefore(before, node);
+              parent.insertBefore(span, node);
+              parent.insertBefore(after, node);
+              parent.removeChild(node);
+            }
+          } else if (node.nodeType === Node.ELEMENT_NODE && node.childNodes && !node.classList.contains('highlight')) {
+            // Push all child nodes to the stack in reverse order
+            for (let i = node.childNodes.length - 1; i >= 0; i--) {
+              nodeStack.push(node.childNodes[i]);
+            }
+          }
+        }
+      }
+
+      searchInput.addEventListener("input", (e) => {
+        performSearch(e.target.value);
+        // Add animation to search input
+        searchInput.classList.add('searching');
+        setTimeout(() => searchInput.classList.remove('searching'), 300);
+      });
+      
+      // Add focus animation
+      searchInput.addEventListener("focus", () => {
+        searchInput.classList.add('focused');
+      });
+      
+      searchInput.addEventListener("blur", () => {
+        searchInput.classList.remove('focused');
+      });
+    }
+
+    // Enhanced Intersection Observer for lazy loading with staggered animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            // Add staggered delay based on card position
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, index * 100);
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    );
+
+    // Apply observer to all profile cards
+    document.querySelectorAll('.profile-card').forEach((card, index) => {
+      // Set initial state
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      observer.observe(card);
+      
+      // Add hover sound effect (subtle click)
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+      });
+    });
+    
+    // Add page load animation
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.dashboard').classList.add('loaded');
+    });
+    
+    // Add smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+  <style>
+    /* Additional Animation Styles */
+    .mode-transition {
+      animation: pulse 0.5s ease;
+    }
+    
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .search-match {
+      animation: highlight-pulse 0.5s ease;
+    }
+    
+    @keyframes highlight-pulse {
+      0% { box-shadow: 0 0 0 rgba(14, 255, 255, 0); }
+      50% { box-shadow: 0 0 15px rgba(14, 255, 255, 0.5); }
+      100% { box-shadow: 0 0 0 rgba(14, 255, 255, 0); }
+    }
+    
+    .searching {
+      animation: input-pulse 0.3s ease;
+    }
+    
+    @keyframes input-pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    
+    .focused {
+      transform: scale(1.02);
+    }
+    
+    .search-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      pointer-events: none;
+    }
+    
+    .filter-controls {
+      position: relative;
+    }
+    
+    .dashboard.loaded {
+      animation: fadeIn 0.8s ease forwards;
+    }
+    
+    .navbar a {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #0ef;
+      transition: width 0.3s ease;
+    }
+    
+    .navbar a:hover::after {
+      width: 100%;
+    }
+  </style>
+</body>
+</html>
